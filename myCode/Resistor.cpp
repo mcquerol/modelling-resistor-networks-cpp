@@ -17,14 +17,19 @@ Resistor::~Resistor()
 }
 
 
-std::string Resistor::getName()
+std::string Resistor::getName() const
 {
 	return name;
 }
 
-std::string Resistor::toString()
+std::string Resistor::toString() const
 {
 
-	return getName() + " = " + nominalValue() + " Ohm";
+	return getName() + " = " + std::to_string(nominalValue()) + " Ohm";
 }
 
+std::ostream& operator<<(std::ostream& out, const Resistor& resistor)
+{
+	out << resistor.toString();
+	return out;
+}
