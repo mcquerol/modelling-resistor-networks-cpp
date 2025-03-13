@@ -12,10 +12,11 @@
 #include <memory>
 #include <ostream>
 
-typedef std::shared_ptr<Resistor> ResistorPtr;
+
 
 class Resistor
 {
+typedef std::shared_ptr<Resistor> ResistorPtr;
 
 private:
 	std::string name;
@@ -23,16 +24,15 @@ public:
 	Resistor(std::string name);
 	virtual ~Resistor();
 
-	std::string getName();
+	std::string getName() const;
 
 	virtual float nominalValue() const = 0;
 	virtual float minimumValue() const = 0;
 	virtual float maximumValue() const = 0;
 
-	std::string toString();
+	std::string toString() const;
 
-	std::ostream friend operator<<(std::ostream& out, const Resistor&);
 };
-
+std::ostream& operator<<(std::ostream& out, const Resistor& resistor);
 
 #endif /* RESISTOR_H_ */
