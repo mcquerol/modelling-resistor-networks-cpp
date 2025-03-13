@@ -26,3 +26,4 @@ char ResistorConnection::separator() const
 {
 	return ',';
 }
+
