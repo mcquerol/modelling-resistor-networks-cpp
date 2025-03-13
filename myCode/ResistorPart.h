@@ -9,8 +9,9 @@
 #define RESISTORPART_H_
 
 #include <string>
+#include "Resistor.h"
 
-class ResistorPart
+class ResistorPart : public Resistor
 {
 
 private:
