@@ -8,23 +8,21 @@
 #include "ResistorPart.h"
 #include <string>
 
-ResistorPart::ResistorPart(std::string name, float value, float tolerance)
+ResistorPart::ResistorPart(std::string name, float value, float tolerance) : value{value}, tolerance{tolerance}
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 float ResistorPart::nominalValue() const
 {
-	return 0.0;
+	return value;
 }
 
 float ResistorPart::minimumValue() const
 {
-	return 0.0;
+	return value * (1 - tolerance);
 }
 
 float ResistorPart::maximumValue() const
 {
-	return 0.0;
+	return value * (1 + tolerance);
 }
