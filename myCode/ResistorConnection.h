@@ -22,7 +22,7 @@ protected:
 public:
     ResistorConnection(std::string name);
 
-    virtual char separator() const = 0;  // This remains abstract as per UML
+    char separator() const;
 
     std::string getName() const;
 
