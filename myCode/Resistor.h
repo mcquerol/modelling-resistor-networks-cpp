@@ -30,9 +30,9 @@ public:
 	virtual float minimumValue() const = 0;
 	virtual float maximumValue() const = 0;
 
-	std::string toString() const;
-
+	virtual std::string toString() const;
+	friend std::ostream& operator<<(std::ostream& out, const Resistor& resistor);
 };
-std::ostream& operator<<(std::ostream& out, const Resistor& resistor);
+
 
 #endif /* RESISTOR_H_ */
