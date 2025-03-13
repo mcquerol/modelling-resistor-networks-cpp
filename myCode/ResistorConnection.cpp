@@ -24,4 +24,5 @@ ResistorConnection& ResistorConnection::operator +=(const std::shared_ptr<Resist
 
 char ResistorConnection::separator() const
 {
+	return ',';
 }
