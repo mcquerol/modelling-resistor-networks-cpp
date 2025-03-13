@@ -16,8 +16,15 @@ Resistor::~Resistor()
 {
 }
 
+
+std::string Resistor::getName()
+{
+	return name;
+}
+
 std::string Resistor::toString()
 {
 
-	return getName() + ' = ' + nominalValue();
+	return getName() + " = " + nominalValue() + " Ohm";
 }
+
