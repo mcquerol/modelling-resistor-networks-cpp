@@ -18,5 +18,6 @@ Resistor::~Resistor()
 
 std::string Resistor::toString()
 {
-	return name;
+
+	return getName() + ' = ' + nominalValue();
 }
