@@ -9,7 +9,9 @@
 #define RESISTOR_H_
 
 #include <string>
+#include <memory>
 
+typedef std::shared_ptr<Resistor> ResistorPtr;
 class Resistor
 {
 
