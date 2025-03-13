@@ -21,3 +21,7 @@ ResistorConnection& ResistorConnection::operator +=(const std::shared_ptr<Resist
 {
 	return *this;
 }
+
+char ResistorConnection::separator() const
+{
+}
