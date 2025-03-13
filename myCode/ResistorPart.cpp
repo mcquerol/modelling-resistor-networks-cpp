@@ -8,7 +8,7 @@
 #include "ResistorPart.h"
 #include <string>
 
-ResistorPart::ResistorPart(std::string name, float value, float tolerance) : value{value}, tolerance{tolerance}
+ResistorPart::ResistorPart(std::string name, float value, float tolerance) : Resistor{name}, value{value}, tolerance{tolerance}
 {
 }
 
