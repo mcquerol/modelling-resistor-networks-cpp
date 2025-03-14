@@ -19,10 +19,10 @@ float ResistorPart::nominalValue() const
 
 float ResistorPart::minimumValue() const
 {
-	return value * (1 - tolerance);
+	return value * (1 - (tolerance/100));
 }
 
 float ResistorPart::maximumValue() const
 {
-	return value * (1 + tolerance);
+	return value * (1 + (tolerance/100));
 }
