@@ -24,13 +24,16 @@ std::string ResistorConnection::getName() const
 	}
 	else
 	{
-		connectionName = Resistor::getName() + "[";
+		connectionName += Resistor::getName() + "[";
+        auto it = resistors.begin();  // Get the first element
+        connectionName += (*it)->getName();  // Add first resistor's name
+        ++it;  // Move to next element
 
-		for(const auto& resistor : resistors)
+		while (it != resistors.end()) // Iterate through the rest
 		{
-
-			connectionName += resistor->getName();
-			connectionName += separator();
+			connectionName += separator();  // Add separator before each resistor
+			connectionName += (*it)->getName();
+			++it;
 		}
 		connectionName += "]";
 	}
