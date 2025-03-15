@@ -14,20 +14,50 @@ SerialResistorConnection::SerialResistorConnection(std::string name) : ResistorC
 
 char SerialResistorConnection::separator() const
 {
-	return ' ';
+	return '-';
 }
 
 float SerialResistorConnection::nominalValue() const
 {
-	return 0.0;
+	float nominalValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		nominalValueSum += resistor->nominalValue();
+	}
+
+	return nominalValueSum;
 }
 
 float SerialResistorConnection::minimumValue() const
 {
-	return 0.0;
+	float minimumValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		minimumValueSum += resistor->minimumValue();
+	}
+
+	return minimumValueSum;
 }
 
 float SerialResistorConnection::maximumValue() const
 {
-	return 0.0;
+	float maximumValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		maximumValueSum += resistor->maximumValue();
+	}
+
+	return maximumValueSum;
 }
