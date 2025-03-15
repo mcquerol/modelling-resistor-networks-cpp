@@ -14,7 +14,7 @@ ParallelResistorConnection::ParallelResistorConnection(std::string name) : Resis
 
 char ParallelResistorConnection::separator() const
 {
-	return '-';
+	return '|';
 }
 
 float ParallelResistorConnection::nominalValue() const
@@ -26,7 +26,7 @@ float ParallelResistorConnection::nominalValue() const
 	}
 	for(const auto& resistor : resistors)
 	{
-		nominalValueSum += (1/resistor->maximumValue());
+		nominalValueSum += (1/resistor->nominalValue());
 	}
 
 	return 1/nominalValueSum;
