@@ -14,7 +14,7 @@ ResistorConnection::ResistorConnection(std::string name) : Resistor(name)
 
 std::string ResistorConnection::getName() const
 {
-	return "";
+	return name;
 }
 
 ResistorConnection& ResistorConnection::operator +=(const std::shared_ptr<Resistor> &resistor)
