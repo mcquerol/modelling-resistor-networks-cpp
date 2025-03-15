@@ -22,7 +22,7 @@ protected:
 public:
     ResistorConnection(std::string name);
 
-    char separator() const;
+    virtual char separator() const;
 
     std::string getName() const;
 
