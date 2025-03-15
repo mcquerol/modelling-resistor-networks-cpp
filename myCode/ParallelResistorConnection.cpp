@@ -14,20 +14,50 @@ ParallelResistorConnection::ParallelResistorConnection(std::string name) : Resis
 
 char ParallelResistorConnection::separator() const
 {
-	return ' ';
+	return '-';
 }
 
 float ParallelResistorConnection::nominalValue() const
 {
-	return 0.0;
+	float nominalValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		nominalValueSum += (1/resistor->maximumValue());
+	}
+
+	return 1/nominalValueSum;
 }
 
 float ParallelResistorConnection::minimumValue() const
 {
-	return 0.0;
+	float minimumValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		minimumValueSum += (1/resistor->minimumValue());
+	}
+
+	return 1/minimumValueSum;
 }
 
 float ParallelResistorConnection::maximumValue() const
 {
-	return 0.0;
+	float maximumValueSum;
+	if(resistors.empty())
+	{
+		return 0.0;
+	}
+	for(const auto& resistor : resistors)
+	{
+		maximumValueSum += (1/resistor->maximumValue());
+	}
+
+	return 1/maximumValueSum;
 }
