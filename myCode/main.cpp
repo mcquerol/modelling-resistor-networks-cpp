@@ -14,8 +14,8 @@ int main ()
 	cout << r << endl;
 
 	/* test 2 Series connection */
-    std::shared_ptr<Resistor> r3 = std::make_shared<ResistorPart>("R3", 1000, 10);
-    std::shared_ptr<Resistor> r4 = std::make_shared<ResistorPart>("R4", 4700, 10);
+    std::shared_ptr<Resistor> r3 = std::make_shared<ResistorPart>("R3", 1000, 0.1);
+    std::shared_ptr<Resistor> r4 = std::make_shared<ResistorPart>("R4", 4700, 0.1);
 
     // Create a serial resistor connection named R2
     SerialResistorConnection conn1("R2");
@@ -28,8 +28,8 @@ int main ()
     cout << conn1 <<endl;
 
     /* test 3 Parallel connection */
-    std::shared_ptr<Resistor> r6 = std::make_shared<ResistorPart>("R6", 1000, 10);
-    std::shared_ptr<Resistor> r7 = std::make_shared<ResistorPart>("R7", 4700, 10);
+    std::shared_ptr<Resistor> r6 = std::make_shared<ResistorPart>("R6", 1000, 0.1);
+    std::shared_ptr<Resistor> r7 = std::make_shared<ResistorPart>("R7", 4700, 0.1);
 
     // Create a serial resistor connection named R2
     ParallelResistorConnection conn2("R5");
