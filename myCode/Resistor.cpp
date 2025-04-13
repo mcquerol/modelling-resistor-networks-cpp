@@ -16,7 +16,6 @@ Resistor::~Resistor()
 {
 }
 
-
 std::string Resistor::getName() const
 {
 	return name;
@@ -24,7 +23,6 @@ std::string Resistor::getName() const
 
 std::string Resistor::toString() const
 {
-
 	return getName() + " = " + std::to_string(nominalValue()) + " Ohm";
 }
 
@@ -32,4 +30,9 @@ std::ostream& operator<<(std::ostream& out, const Resistor& resistor)
 {
 	out << resistor.toString();
 	return out;
+}
+
+void Resistor::write(std::ostream &out)
+{
+	 out << (maximumValue() - nominalValue()) / nominalValue();
 }
