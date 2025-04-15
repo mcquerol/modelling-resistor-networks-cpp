@@ -33,7 +33,7 @@ public:
 	virtual std::string toString() const;
 	friend std::ostream& operator<<(std::ostream& out, const Resistor& resistor);
 
-	virtual void write(std::ostream& out);
+	void write(std::ostream& out);
 };
 
 
