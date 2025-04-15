@@ -19,10 +19,10 @@ char ParallelResistorConnection::separator() const
 
 float ParallelResistorConnection::nominalValue() const
 {
-	float nominalValueSum;
+	float nominalValueSum = 0.0f;
 	if(resistors.empty())
 	{
-		return 0.0;
+		return 0.0f;
 	}
 	for(const auto& resistor : resistors)
 	{
@@ -34,10 +34,10 @@ float ParallelResistorConnection::nominalValue() const
 
 float ParallelResistorConnection::minimumValue() const
 {
-	float minimumValueSum;
+	float minimumValueSum = 0.0f;
 	if(resistors.empty())
 	{
-		return 0.0;
+		return 0.0f;
 	}
 	for(const auto& resistor : resistors)
 	{
@@ -49,10 +49,10 @@ float ParallelResistorConnection::minimumValue() const
 
 float ParallelResistorConnection::maximumValue() const
 {
-	float maximumValueSum;
+	float maximumValueSum = 0.0f;
 	if(resistors.empty())
 	{
-		return 0.0;
+		return 0.0f;
 	}
 	for(const auto& resistor : resistors)
 	{
