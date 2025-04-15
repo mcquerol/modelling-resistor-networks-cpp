@@ -11,6 +11,7 @@
 #include <list>
 #include <memory>
 #include <string>
+#include <ostream>
 
 #include "Resistor.h"
 
@@ -27,5 +28,7 @@ public:
     std::string getName() const;
 
     ResistorConnection& operator+=(const std::shared_ptr<Resistor>& resistor);
+
+    void write(std::ostream& out);
 };
 #endif /* RESISTORCONNECTION_H */
