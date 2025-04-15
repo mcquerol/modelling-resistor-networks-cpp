@@ -50,3 +50,14 @@ char ResistorConnection::separator() const
 {
 	return ',';
 }
+
+void ResistorConnection::write(std::ostream &out)
+{
+	for(const auto &resistor: resistors)
+	{
+
+		resistor->write(out);
+		out << endl;
+	}
+	out << getName() << ';' << nominalValue() << ';' << ( (maximumValue() - nominalValue()) / nominalValue()) << endl;
+}
