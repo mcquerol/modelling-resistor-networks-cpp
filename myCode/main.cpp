@@ -5,6 +5,8 @@
 #include "SeriesResistorConnection.h"
 #include "ParallelResistorConnection.h"
 #include "Resistor.h"
+
+#include <fstream>
 using namespace std;
 
 int main ()
@@ -42,8 +44,12 @@ int main ()
     cout << conn2 << endl;
     cout << endl;
 
-    // -- testing the write method for the connection
-    conn1.write(cout);
-    conn2.write(cout);
+    // -- testing the write method for the connection into data.txt
+	ofstream txtFile;
+	txtFile.open("data.txt");
+    conn1.write(txtFile);
+    conn2.write(txtFile);
+    txtFile.close();  // Ensure file is closed properly
+
 	return 0;
 }
