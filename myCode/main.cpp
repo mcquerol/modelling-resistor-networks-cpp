@@ -40,6 +40,10 @@ int main ()
     // Print the connection name
     cout << conn2.getName() << endl;
     cout << conn2 << endl;
+    cout << endl;
 
+    // -- testing the write method for the connection
+    conn1.write(cout);
+    conn2.write(cout);
 	return 0;
 }
