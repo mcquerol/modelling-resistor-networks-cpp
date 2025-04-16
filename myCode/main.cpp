@@ -73,13 +73,16 @@ int main ()
 		}
 		else //resistorconnection object
 		{
+			size_t openBracket = nameStr.find('[');   // index of '['
+			size_t closeBracket = nameStr.find(']');  // index of ']'
+			string connectionName = nameStr.substr(0, openBracket);
 			if(nameStr.find('-'))
 			{
-				SerialResistorConnection s(nameStr);
+				SerialResistorConnection s(connectionName);
 			}
 			else
 			{
-				ParallelResistorConnection p(nameStr);
+				ParallelResistorConnection p(connectionName);
 			}
 		}
     }
