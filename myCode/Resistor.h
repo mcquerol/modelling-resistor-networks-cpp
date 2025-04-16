@@ -12,11 +12,9 @@
 #include <memory>
 #include <ostream>
 
-
-
 class Resistor
 {
-typedef std::shared_ptr<Resistor> ResistorPtr;
+
 
 private:
 	std::string name;
@@ -35,6 +33,6 @@ public:
 
 	void write(std::ostream& out);
 };
-
+typedef std::shared_ptr<Resistor> ResistorPtr;
 
 #endif /* RESISTOR_H_ */
