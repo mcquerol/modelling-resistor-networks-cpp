@@ -7,12 +7,13 @@
 #include "Resistor.h"
 
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 int main ()
 {
 	/* test 1 Create a ResistorPart object */
-	ResistorPart r("R1", 1000, 5);
+	ResistorPart r("R1", 1000, 0.5);
 	cout << r << endl;
 
 	/* test 2 Series connection */
@@ -50,6 +51,39 @@ int main ()
     conn1.write(txtFile);
     conn2.write(txtFile);
     txtFile.close();  // Ensure file is closed properly
+
+    string text, nameStr, nominalValueStr, toleranceStr;
+    float nominalValue = 0.0f;
+    float tolerance = 0.0f;
+    ifstream txtFile2;
+    txtFile2.open("data.txt");
+    while(getline(txtFile2, text))
+    {
+		istringstream iss(text);
+		getline(iss, nameStr, ';');
+		getline(iss, nominalValueStr, ';');
+		nominalValue = std::stof(nominalValueStr);
+		getline(iss, toleranceStr, '\n');
+		tolerance = std::stof(toleranceStr);
+		cout << "Line is : " << nameStr << " " << nominalValue << " " << tolerance << endl;
+
+		if(!nameStr.find('[')) //resistor part object
+		{
+			ResistorPart r(nameStr, nominalValue, tolerance);
+		}
+		else //resistorconnection object
+		{
+			if(nameStr.find('-'))
+			{
+				SerialResistorConnection s(nameStr);
+			}
+			else
+			{
+				ParallelResistorConnection p(nameStr);
+			}
+		}
+    }
+    txtFile2.close();
 
 	return 0;
 }
