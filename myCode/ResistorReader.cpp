@@ -55,6 +55,7 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 		{
 			ResistorPart r(nameStr, nominalValue, tolerance);
 			ResistorPtr rPtr = std::make_shared<ResistorPart>(r);
+			found.emplace(nameStr, rPtr);
 		}
 	}
 }
