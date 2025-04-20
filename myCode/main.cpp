@@ -9,6 +9,8 @@
 #include <sstream>
 
 #include "SerialResistorConnection.h"
+#include "ResistorReader.h"
+
 using namespace std;
 
 int main ()
@@ -52,43 +54,12 @@ int main ()
     conn1.write(txtFile);
     conn2.write(txtFile);
     txtFile.close();  // Ensure file is closed properly
-//
-//    string text, nameStr, nominalValueStr, toleranceStr;
-//    float nominalValue = 0.0f;
-//    float tolerance = 0.0f;
-//    ifstream txtFile2;
-//    txtFile2.open("data.txt");
-//    while(getline(txtFile2, text))
-//    {
-//		istringstream iss(text);
-//		getline(iss, nameStr, ';');
-//		getline(iss, nominalValueStr, ';');
-//		nominalValue = std::stof(nominalValueStr);
-//		getline(iss, toleranceStr, '\n');
-//		tolerance = std::stof(toleranceStr);
-//		cout << "Line is : " << nameStr << " " << nominalValue << " " << tolerance << endl;
-//
-//		if(!nameStr.find('[')) //resistor part object
-//		{
-//			ResistorPart r(nameStr, nominalValue, tolerance);
-//		}
-//		else //resistorconnection object
-//		{
-//			size_t openBracket = nameStr.find('[');   // index of '['
-//			size_t closeBracket = nameStr.find(']');  // index of ']'
-//			string connectionName = nameStr.substr(0, openBracket);
-//			string inside = nameStr.substr(openBracket + 1, closeBracket - openBracket - 1);
-//			if(inside.find('-'))
-//			{
-//				SerialResistorConnection s(connectionName);
-//			}
-//			else
-//			{
-//				ParallelResistorConnection p(connectionName);
-//			}
-//		}
-//    }
-//    txtFile2.close();
+
+    map<string, ResistorPtr> testMap;
+    ifstream txtFile2;
+    txtFile2.open("data.txt");
+    ResistorReader resReader;
+    resReader.read(txtFile2, testMap);
 
 	return 0;
 }
