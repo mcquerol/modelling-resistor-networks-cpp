@@ -33,24 +33,28 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 		tolerance = std::stof(toleranceStr);
 		cout << "Line is : " << nameStr << " " << nominalValue << " " << tolerance << endl;
 
-		if(!nameStr.find('[')) //resistor part object
-		{
-			ResistorPart r(nameStr, nominalValue, tolerance);
-		}
-		else //resistorconnection object
+		if(nameStr.find('[') != string::npos) // resistorconnection object
 		{
 			size_t openBracket = nameStr.find('[');   // index of '['
 			size_t closeBracket = nameStr.find(']');  // index of ']'
 			string connectionName = nameStr.substr(0, openBracket);
 			string inside = nameStr.substr(openBracket + 1, closeBracket - openBracket - 1);
-			if(inside.find('-'))
+
+			if(inside.find('-') != string::npos) // series connection
 			{
-				SerialResistorConnection s(connectionName);
+				SerialResistorConnection s(inside);
+				cout << "series " << inside << " " << __LINE__ << endl;
 			}
 			else
 			{
-				ParallelResistorConnection p(connectionName);
+				ParallelResistorConnection p(inside); // parallel connection
+				cout << "parallel " << inside << " " << __LINE__ << endl;
 			}
 		}
-    }
+		else //resistor part object
+		{
+			ResistorPart r(nameStr, nominalValue, tolerance);
+			ResistorPtr rPtr = std::make_shared<ResistorPart>(r);
+		}
+	}
 }
