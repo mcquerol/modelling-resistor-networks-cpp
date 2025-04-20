@@ -42,12 +42,12 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 
 			if(inside.find('-') != string::npos) // series connection
 			{
-				SerialResistorConnection s(inside);
+				SerialResistorConnection s(connectionName);
 				cout << "series " << inside << " " << __LINE__ << endl;
 			}
 			else
 			{
-				ParallelResistorConnection p(inside); // parallel connection
+				ParallelResistorConnection p(connectionName); // parallel connection
 				cout << "parallel " << inside << " " << __LINE__ << endl;
 			}
 		}
