@@ -31,31 +31,48 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 		nominalValue = std::stof(nominalValueStr);
 		getline(iss, toleranceStr, '\n');
 		tolerance = std::stof(toleranceStr);
-		cout << "Line is : " << nameStr << " " << nominalValue << " " << tolerance << endl;
+
+		size_t openBracket = nameStr.find('[');   // index of '['
+		size_t closeBracket = nameStr.find(']');  // index of ']'
+		string connectionName = nameStr.substr(0, openBracket);
 
 		if(nameStr.find('[') != string::npos) // resistorconnection object
 		{
-			size_t openBracket = nameStr.find('[');   // index of '['
-			size_t closeBracket = nameStr.find(']');  // index of ']'
-			string connectionName = nameStr.substr(0, openBracket);
 			string inside = nameStr.substr(openBracket + 1, closeBracket - openBracket - 1);
+
 
 			if(inside.find('-') != string::npos) // series connection
 			{
-				SerialResistorConnection s(connectionName);
-				cout << "series " << inside << " " << __LINE__ << endl;
+				size_t separator = inside.find('-');
+				string firstResistorPart = inside.substr(0, separator);
+				string secondResistorPart = inside.substr(separator + 1);
+				SerialResistorConnection sConn(connectionName);
+				sConn += found[firstResistorPart];
+				sConn += found[secondResistorPart];
+				ResistorPtr rConnPtr = std::make_shared<SerialResistorConnection>(sConn);
+				found.emplace(connectionName, rConnPtr); //add connection to map
+				found.erase(firstResistorPart); //remove first resistor from map
+				found.erase(secondResistorPart); //remove second resistor from map
 			}
 			else
 			{
-				ParallelResistorConnection p(connectionName); // parallel connection
-				cout << "parallel " << inside << " " << __LINE__ << endl;
+				size_t separator = inside.find('|');
+				string firstResistorPart = inside.substr(0, separator);
+				string secondResistorPart = inside.substr(separator + 1);
+				ParallelResistorConnection pConn(connectionName); // parallel connection
+				pConn += found[firstResistorPart];
+				pConn += found[secondResistorPart];
+				ResistorPtr rConnPtr = std::make_shared<ParallelResistorConnection>(pConn);
+				found.emplace(connectionName, rConnPtr);
+				found.erase(firstResistorPart); //remove first resistor from map
+				found.erase(secondResistorPart); //remove second resistor from map
 			}
 		}
 		else //resistor part object
 		{
-			ResistorPart r(nameStr, nominalValue, tolerance);
+			ResistorPart r(connectionName, nominalValue, tolerance);
 			ResistorPtr rPtr = std::make_shared<ResistorPart>(r);
-			found.emplace(nameStr, rPtr);
+			found.emplace(connectionName, rPtr);
 		}
 	}
 }
