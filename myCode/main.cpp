@@ -17,7 +17,7 @@ int main ()
 {
 	/* test 1 Create a ResistorPart object */
 	ResistorPart r("R1", 1000, 0.5);
-	cout << r << endl;
+	//cout << r << endl;
 
 	/* test 2 Series connection */
     std::shared_ptr<Resistor> r3 = std::make_shared<ResistorPart>("R3", 1000, 0.1);
@@ -30,8 +30,8 @@ int main ()
     conn1 += r3;
     conn1 += r4;
     // Print the connection name
-    cout << conn1.getName() << endl;
-    cout << conn1 <<endl;
+    //cout << conn1.getName() << endl;
+    //cout << conn1 <<endl;
 
     /* test 3 Parallel connection */
     std::shared_ptr<Resistor> r6 = std::make_shared<ResistorPart>("R6", 1000, 0.1);
@@ -44,9 +44,9 @@ int main ()
     conn2 += r6;
     conn2 += r7;
     // Print the connection name
-    cout << conn2.getName() << endl;
-    cout << conn2 << endl;
-    cout << endl;
+    //cout << conn2.getName() << endl;
+    //cout << conn2 << endl;
+    //cout << endl;
 
     // -- testing the write method for the connection into data.txt
 	ofstream txtFile;
@@ -54,8 +54,8 @@ int main ()
     conn1.write(txtFile);
     conn2.write(txtFile);
     txtFile.close();  // Ensure file is closed properly
-    cout << endl;
-    cout << endl;
+    //cout << endl;
+    //cout << endl;
 
     // -- testing the read method for the connection into data.txt
     map<string, ResistorPtr> testMap;
@@ -64,11 +64,11 @@ int main ()
     ResistorReader resReader;
     resReader.read(txtFile2, testMap);
     // read map
-    cout << endl;
-    cout << endl;
+    cout << "Data from : data.txt" << endl;
+    cout << "------------------------------" << endl;
     for(const auto& res: testMap)
     {
-    	cout << res.first << ',' << res.second->nominalValue() << endl;
+    	cout << *res.second << endl;
     }
 
 	return 0;
