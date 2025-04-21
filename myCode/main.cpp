@@ -54,12 +54,22 @@ int main ()
     conn1.write(txtFile);
     conn2.write(txtFile);
     txtFile.close();  // Ensure file is closed properly
+    cout << endl;
+    cout << endl;
 
+    // -- testing the read method for the connection into data.txt
     map<string, ResistorPtr> testMap;
     ifstream txtFile2;
     txtFile2.open("data.txt");
     ResistorReader resReader;
     resReader.read(txtFile2, testMap);
+    // read map
+    cout << endl;
+    cout << endl;
+    for(const auto& res: testMap)
+    {
+    	cout << res.first << ',' << res.second->nominalValue() << endl;
+    }
 
 	return 0;
 }
