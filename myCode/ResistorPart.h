@@ -25,7 +25,7 @@ public:
 	float minimumValue() const;
 	float maximumValue() const;
 
-	ResistorPtr from(std::string line);
+	static ResistorPtr from(std::string line);
 };
 
 #endif /* RESISTORPART_H_ */
