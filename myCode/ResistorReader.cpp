@@ -18,19 +18,12 @@ using namespace std;
 
 void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &found)
 {
-
     string text, nameStr, nominalValueStr, toleranceStr;
-    float nominalValue = 0.0f;
-    float tolerance = 0.0f;
 
     while(getline(in, text))
     {
 		istringstream iss(text);
 		getline(iss, nameStr, ';');
-		getline(iss, nominalValueStr, ';');
-		nominalValue = std::stof(nominalValueStr);
-		getline(iss, toleranceStr, '\n');
-		tolerance = std::stof(toleranceStr);
 
 		size_t openBracket = nameStr.find('[');   // index of '['
 		size_t closeBracket = nameStr.find(']');  // index of ']'
@@ -39,7 +32,6 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 		if(nameStr.find('[') != string::npos) // resistorconnection object
 		{
 			string inside = nameStr.substr(openBracket + 1, closeBracket - openBracket - 1);
-
 
 			if(inside.find('-') != string::npos) // series connection
 			{
@@ -70,9 +62,8 @@ void ResistorReader::read(std::istream &in, std::map<std::string, ResistorPtr> &
 		}
 		else //resistor part object
 		{
-			ResistorPart r(connectionName, nominalValue, tolerance);
-			ResistorPtr rPtr = std::make_shared<ResistorPart>(r);
-			found.emplace(connectionName, rPtr);
+			ResistorPtr rPtr = ResistorPart::from(text);
+			found.emplace(nameStr, rPtr);
 		}
 	}
 }
